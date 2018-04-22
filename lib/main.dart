@@ -1,4 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:helloworld/MySimpleListApp.dart';
+import 'package:helloworld/MyHorizontalListApp.dart';
 
-void main() => runApp(new MySimpleListApp());
+void main() => runApp(new MyHorizontalListApp());
