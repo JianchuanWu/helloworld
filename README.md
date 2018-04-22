@@ -6,3 +6,5 @@ A new Flutter project.
 
 For help getting started with Flutter, view our online
 [documentation](http://flutter.io/).
+
+For help get package, to view [package](https://pub.dartlang.org/)
