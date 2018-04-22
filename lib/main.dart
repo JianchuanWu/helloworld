@@ -1,4 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:helloworld/MyCachedImageApp.dart';
+import 'package:helloworld/MySimpleListApp.dart';
 
-void main() => runApp(new MyCachedImageApp());
+void main() => runApp(new MySimpleListApp());
