@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
-class MyApp extends StatelessWidget {
+class MyThemeApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appName = 'Custom Themes';
