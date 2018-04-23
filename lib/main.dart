@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:helloworld/gesture/DismissibleApp.dart';
+import 'package:helloworld/gesture/NavigatorApp.dart';
 
-void main() => runApp(new DismissibleApp(
-      items: new List<String>.generate(20, (i) => 'Item ${i + 1}'),
+void main() => runApp(new MaterialApp(
+      title: 'Navigation Basics',
+      home: new FirstScreen(),
     ));
