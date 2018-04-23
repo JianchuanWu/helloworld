@@ -1,4 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:helloworld/gesture/TapsGesture.dart';
+import 'package:helloworld/gesture/InkWellApp.dart';
 
-void main() => runApp(new TapsGesture());
+void main() => runApp(new InkWellApp());
