@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'dart:convert';
 
+import 'package:helloworld/simple_app/views/Detail.dart';
+
 class MyList extends StatefulWidget {
   @override
   MyListState createState() => new MyListState();
@@ -93,9 +95,29 @@ class MyListState extends State<MyList> {
                   Icons.keyboard_arrow_right,
                   color: Colors.grey,
                 ),
+                onTap: () => _onTap(data[index]["id"].toString()),
               ),
             ),
           );
         });
+  }
+
+  void _onTap(String id) {
+    Navigator.of(context).push(new PageRouteBuilder(
+        opaque: false,
+        pageBuilder: (BuildContext context, _, __) {
+          return new Detail(id);
+        },
+        transitionsBuilder: (_, Animation<double> animation, __, Widget child) {
+          return new FadeTransition(
+            opacity: animation,
+            child: new SlideTransition(
+              position: new Tween<Offset>(
+                      begin: const Offset(0.0, 1.0), end: Offset.zero)
+                  .animate(animation),
+              child: child,
+            ),
+          );
+        }));
   }
 }
