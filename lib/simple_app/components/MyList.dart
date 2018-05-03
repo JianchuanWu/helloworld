@@ -72,7 +72,7 @@ class MyListState extends State<MyList> {
                   Icons.keyboard_arrow_right,
                   color: Colors.grey,
                 ),
-                onTap: () => _onTap(data[index]["id"].toString()),
+                onTap: () => _onTap(data[index]["body"]),
               ),
             ),
           );

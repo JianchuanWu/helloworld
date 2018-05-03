@@ -35,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage>
         ],
       ),
       bottomNavigationBar: new Material(
-        color: Colors.orangeAccent,
+        color: Colors.black87,
         child: new TabBar(controller: controller, tabs: <Tab>[
           new Tab(
             text: '列表',
