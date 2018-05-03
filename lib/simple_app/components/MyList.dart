@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'dart:convert';
 
-import 'package:helloworld/simple_app/views/Detail.dart';
+import 'package:helloworld/simple_app/components/Detail.dart';
 
 class MyList extends StatefulWidget {
   @override
@@ -16,29 +16,6 @@ class MyListState extends State<MyList> {
   void initState() {
     super.initState();
     getData();
-  }
-
-  getData() async {
-    var url = "https://jsonplaceholder.typicode.com/posts";
-    var httpClient = new HttpClient();
-
-    var result;
-    try {
-      var request = await httpClient.getUrl(Uri.parse(url));
-      var response = await request.close();
-      if (response.statusCode == HttpStatus.OK) {
-        var json = await response.transform(UTF8.decoder).join();
-        result = JSON.decode(json);
-      } else {
-        result = 'Error getting JSON data:\nHttp status ${response.statusCode}';
-      }
-    } catch (exception) {
-      result = 'Faild getting JSON data.';
-    }
-    if (!mounted) return;
-    setState(() {
-      data = result;
-    });
   }
 
   @override
@@ -119,5 +96,28 @@ class MyListState extends State<MyList> {
             ),
           );
         }));
+  }
+
+  getData() async {
+    var url = "https://jsonplaceholder.typicode.com/posts";
+    var httpClient = new HttpClient();
+
+    var result;
+    try {
+      var request = await httpClient.getUrl(Uri.parse(url));
+      var response = await request.close();
+      if (response.statusCode == HttpStatus.OK) {
+        var json = await response.transform(UTF8.decoder).join();
+        result = JSON.decode(json);
+      } else {
+        result = 'Error getting JSON data:\nHttp status ${response.statusCode}';
+      }
+    } catch (exception) {
+      result = 'Faild getting JSON data.';
+    }
+    if (!mounted) return;
+    setState(() {
+      data = result;
+    });
   }
 }
