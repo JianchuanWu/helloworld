@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
+import 'dart:convert';
 
 class MyList extends StatefulWidget {
   @override
@@ -6,10 +8,41 @@ class MyList extends StatefulWidget {
 }
 
 class MyListState extends State<MyList> {
+  var data;
+
+  @override
+  void initState() {
+    super.initState();
+    data = getData();
+  }
+
+  getData() async {
+    var url = "https://jsonplaceholder.typicode.com/posts";
+    var httpClient = new HttpClient();
+
+    var result;
+    try {
+      var request = await httpClient.getUrl(Uri.parse(url));
+      var response = await request.close();
+      if (response.statusCode == HttpStatus.OK) {
+        var json = await response.transform(UTF8.decoder).join();
+        result = JSON.decode(json);
+      } else {
+        result = 'Error getting JSON data:\nHttp status ${response.statusCode}';
+      }
+    } catch (exception) {
+      result = 'Faild getting JSON data.';
+    }
+    if (!mounted) return;
+    setState(() {
+      data = result;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return new ListView.builder(
-        itemCount: 10,
+        itemCount: data == null ? 0 : data.length,
         itemBuilder: (BuildContext context, int index) {
           return new Card(
             child: new Container(
@@ -22,11 +55,37 @@ class MyListState extends State<MyList> {
                       new Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          new Text("标题",
-                              style: new TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 16.0)),
+                          new Expanded(
+                            child: new Text(data[index]["title"],
+                                style: new TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16.0)),
+                          )
                         ],
-                      )
+                      ),
+                      new Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          new Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              new Text("时间"),
+                              new Text("2018-05-04 21:16:30")
+                            ],
+                          ),
+                        ],
+                      ),
+                      new Row(
+                        children: <Widget>[
+                          new Container(
+                            padding:
+                                const EdgeInsets.fromLTRB(0.0, 8.0, 0.0, 2.0),
+                            child:
+                                new Text('id:' + data[index]["id"].toString()),
+                          )
+                        ],
+                      ),
                     ],
                   ),
                 ),
