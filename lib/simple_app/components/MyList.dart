@@ -15,7 +15,7 @@ class MyListState extends State<MyList> {
   @override
   void initState() {
     super.initState();
-    data = getData();
+    getData();
   }
 
   getData() async {
